@@ -21,7 +21,7 @@
                                 <rect key="frame" x="427" y="271" width="170" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Login" textAlignment="natural" minimumFontSize="17" id="EON-1t-EcE">
@@ -42,14 +42,6 @@
                                 <state key="normal" title="Go Gators"/>
                                 <connections>
                                     <action selector="loginGo:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7jm-QC-RaS"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Glw-br-n9v">
-                                <rect key="frame" x="19" y="718" width="48" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Signup"/>
-                                <connections>
-                                    <segue destination="dMt-RR-QB5" kind="modal" id="AKB-Tm-4NV"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -85,7 +77,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Go"/>
                                 <connections>
-                                    <action selector="signupFunc:" destination="dMt-RR-QB5" eventType="touchUpInside" id="Pfy-ic-opl"/>
+                                    <action selector="signupGo:" destination="dMt-RR-QB5" eventType="touchUpInside" id="j40-4L-ufI"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Email" textAlignment="natural" minimumFontSize="17" id="rSn-LG-SkU">
@@ -107,7 +99,6 @@
                     <connections>
                         <outlet property="emailText" destination="rSn-LG-SkU" id="diT-ZO-sfX"/>
                         <outlet property="pwdText" destination="ISa-Fw-Y24" id="pz1-kp-1yO"/>
-                        <outlet property="signupFunc" destination="UbO-ty-Ag3" id="0vD-TH-dg5"/>
                         <outlet property="userNameText" destination="biZ-6K-yMq" id="rMA-2Q-Hpw"/>
                     </connections>
                 </viewController>
@@ -122,16 +113,49 @@
                     <view key="view" contentMode="scaleToFill" id="LXl-8a-N2H">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Header.png" id="v8k-Il-0hn">
+                                <rect key="frame" x="0.0" y="0.0" width="1024" height="157"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Footer.png" id="rzD-i6-8eu">
+                                <rect key="frame" x="0.0" y="611" width="1024" height="157"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="BnT-sM-F05">
+                                <rect key="frame" x="174" y="172" width="785" height="425"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="kVl-Ae-QUB">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="qiR-ef-N2B">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IaS-2U-zqL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="569" y="1713"/>
+            <point key="canvasLocation" x="555" y="1671"/>
         </scene>
     </scenes>
     <resources>
+        <image name="Footer.png" width="1276" height="200"/>
+        <image name="Header.png" width="1276" height="200"/>
         <image name="background.jpg" width="1280" height="800"/>
     </resources>
 </document>
