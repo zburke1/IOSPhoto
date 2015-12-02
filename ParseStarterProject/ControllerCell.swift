@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import ParseUI
 
 class ControllerCell : UICollectionViewCell {
     @IBOutlet weak var customTitle: UILabel!
-    @IBOutlet weak var customImage: UIImageView!
+    @IBOutlet weak var customImage: PFImageView!
     
     
 }

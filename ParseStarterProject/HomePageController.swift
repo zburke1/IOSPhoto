@@ -9,14 +9,13 @@
 
 import UIKit
 import Parse
+import ParseUI
+import Bolts
 
-var parseEvents = [PFObject]()
-var Event = PFObject()
-
-class HomePageController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class HomePageController: UIViewController,UICollectionViewDelegateFlowLayout,UICollectionViewDelegate, UICollectionViewDataSource {
     
-   
-    var imageArray = [PFObject]()
+
+   var parseEvents = [PFObject]()
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -26,24 +25,41 @@ class HomePageController: UIViewController, UICollectionViewDataSource, UICollec
         let cellWidth = ((UIScreen.mainScreen().bounds.width) - 32 - 30 ) / 7
         let cellLayout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
         cellLayout.itemSize = CGSize(width: cellWidth, height: cellWidth)
+        loadCollectionViewData()
+        
     }
     
+    
     override func viewDidAppear(animated: Bool) {
-        loadCollectionViewData()
+        
     }
+    
+    
     
     func loadCollectionViewData(){
         var query = PFQuery(className:"Events")
         
-        // Fetch data from the parse platform
-        do {
-            parseEvents = try query.findObjects()
-            print(parseEvents.count)
-            self.collectionView.reloadData()
+        query.findObjectsInBackgroundWithBlock{(objects: [PFObject]?, error: NSError?) -> Void in
+            
+            // The find succeeded now rocess the found objects into the countries array
+            if error == nil {
+                
+               
+                // Add country objects to our array
+                if var objects = objects as [PFObject]!{
+                    objects = objects.reverse()
+                    self.parseEvents = objects + self.parseEvents
+                }
+                self.collectionView!.reloadData()
+                
+                
+            } else {
+                // Log details of the failure
+               print(error?.description)
+            }
+            
         }
-        catch{
-            print("Get events failed")
-        }
+        
     }
     
     //                                                              //
@@ -70,23 +86,32 @@ class HomePageController: UIViewController, UICollectionViewDataSource, UICollec
         }
         
         // Display "initial" flag image
-        let initialThumbnail = UIImage(named: "imgPlaceholder.jpg")
-        cell.customImage.image = initialThumbnail
+//        var initialThumbnail = UIImage(named: "imgPlaceholder.jpg")
         
+        cell.customImage.image = UIImage(named: "imgPlaceholder.jpg")
+       // initialThumbnail = nil
+        cell.customImage.file = parseEvents[indexPath.row]["eventThumb"] as? PFFile
+        // remote image
+        
+         cell.customImage.loadInBackground()
 //        // Fetch final flag image - if it exists
-        if let value = parseEvents[indexPath.row]["eventThumb"] as? PFFile {
-            let finalImage = parseEvents[indexPath.row]["eventThumb"] as? PFFile
-            finalImage!.getDataInBackgroundWithBlock {
-                (imageData: NSData?, error: NSError?) -> Void in
-                if error == nil {
-                    if let imageData = imageData {
-                        cell.customImage.image = UIImage(data:imageData)
-                    }
-                }
-            }
-        }
+//            var finalImage = parseEvents[indexPath.row]["eventThumb"] as! PFFile
+//            finalImage.getDataInBackgroundWithBlock {
+//                (imageData: NSData?, error: NSError?) -> Void in
+//                if error == nil {
+//                    if let imageData = imageData {
+//                        var image = UIImage(data:imageData)
+//                        cell.customImage.image = image!
+//                        image = nil
+//                    
+//                }
+//            }
+//        }
+        
         return cell
     }
+    
+    
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let currentObject = parseEvents[indexPath.row]
@@ -104,14 +129,19 @@ class HomePageController: UIViewController, UICollectionViewDataSource, UICollec
         // Dispose of any resources that can be recreated.
         }
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+       print("Running")
+        parseEvents = []
+        collectionView.layoutIfNeeded()
+        PFQuery.clearAllCachedResults()
+        NSURLCache.sharedURLCache().removeAllCachedResponses()
         if segue.identifier == "EventSelectedSegue"
         {
             var currentObject : PFObject?
             if let event = sender as? PFObject{
                 currentObject = sender as? PFObject
-            } else {
+            }
+            else {
                 // No cell selected in collectionView - must be a new country record being created
-                currentObject = PFObject(className:"Countries")
             }
             let singleScene = segue.destinationViewController as! SingleEventController
             singleScene.currentEvent = (currentObject)
@@ -121,62 +151,3 @@ class HomePageController: UIViewController, UICollectionViewDataSource, UICollec
 
 
 }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-//    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-//            let imageInfo: PFObject = imageArray[indexPath.row] as PFObject
-//            
-//            var cell:ControllerCell!  = collectionView.dequeueReusableCellWithReuseIdentifier("Cell", forIndexPath: indexPath) as! ControllerCell
-//            if cell == nil {
-//                
-//                cell = collectionView.dequeueReusableCellWithReuseIdentifier("Cell", forIndexPath: indexPath) as? ControllerCell
-//            }
-//        cell.customTitle.text = String("TEST")
-//
-//           // cell.customTitle.text = String(imageInfo["imageName"])
-//           // print(String(imageInfo["imageName"]) + " image name")
-//            let userImageFile = imageInfo["image"] as! PFFile
-//            userImageFile.getDataInBackgroundWithBlock {
-//                (imageData: NSData?, error: NSError?) -> Void in
-//                if error == nil {
-//                    if let imageData = imageData {
-//                        let image = UIImage(data:imageData)
-//                        cell.customImage.image = image
-//                    }
-//                }
-//            }
-//            
-//            return cell
-//    }
-    
-    
-//    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-//        let imageInfo: PFObject = imageArray[indexPath.row] as PFObject
-//        let userImageFile = imageInfo["image"] as! PFFile
-//        userImageFile.getDataInBackgroundWithBlock {
-//            (imageData: NSData?, error: NSError?) -> Void in
-//            if error == nil {
-//                if let imageData = imageData {
-//                    let image = UIImage(data:imageData)
-//                    self.imageSelected = image!
-//                    self.performSegueWithIdentifier("homeImageView", sender: self)
-//                }
-//            }
-//            else{
-//                print("Get image selection failed")
-//            }
-//        }
-//        
-//        
-//    }
-    
-    
-

@@ -34,14 +34,43 @@ class PicMapViewController: UIViewController {
         
         var locationsQuery = query.whereKeyExists("eventLocation")
         // Fetch data from the parse platform
-        do {
-            parseEventLocations = try locationsQuery.findObjects()
-            print(parseEventLocations.count)
-            addPoints();
+        
+        
+        locationsQuery.findObjectsInBackgroundWithBlock{(objects: [PFObject]?, error: NSError?) -> Void in
+            
+            // The find succeeded now rocess the found objects into the countries array
+            if error == nil {
+                
+                // Clear existing country data
+               // parseEvents.removeAll(keepCapacity: true)
+                
+                // Add country objects to our array
+                if let objects = objects {
+                    self.parseEventLocations = Array(objects.generate())
+                }
+                
+                // reload our data into the collection view
+                self.addPoints();
+                
+            } else {
+                // Log details of the failure
+                print("SEARCH FAILED")
+            }
         }
-        catch{
-            print("Get events failed")
-        }
+        
+        
+        
+        
+        
+        
+//        do {
+//            parseEventLocations = try locationsQuery.findObjects()
+//            print(parseEventLocations.count)
+//            addPoints();
+//        }
+//        catch{
+//            print("Get events failed")
+//        }
     }
     
     func addPoints(){
