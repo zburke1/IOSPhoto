@@ -10,19 +10,38 @@ import UIKit
 import Parse
 import MapKit
 
-class PicMapViewController: UIViewController {
+class PicMapViewController: UIViewController,MKMapViewDelegate {
     var parseEventLocations = [PFObject]()
     @IBOutlet weak var mapView: MKMapView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.mapView.delegate = self
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        print("Cleaning Map Memory")
+        switch (self.mapView.mapType) {
+        case MKMapType.Hybrid:
+            self.mapView.mapType = MKMapType.Standard
+            break;
+        case MKMapType.Standard:
+            self.mapView.mapType = MKMapType.Hybrid
+            break;
+        default:
+            break;
+        }
+        
+        self.mapView.delegate = nil
+        self.mapView.removeFromSuperview()
+        self.mapView = nil;
     }
     
     override func viewDidAppear(animated: Bool) {
         loadMapPoints()
     }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -40,9 +59,7 @@ class PicMapViewController: UIViewController {
             
             // The find succeeded now rocess the found objects into the countries array
             if error == nil {
-                
-                // Clear existing country data
-               // parseEvents.removeAll(keepCapacity: true)
+
                 
                 // Add country objects to our array
                 if let objects = objects {
@@ -57,20 +74,6 @@ class PicMapViewController: UIViewController {
                 print("SEARCH FAILED")
             }
         }
-        
-        
-        
-        
-        
-        
-//        do {
-//            parseEventLocations = try locationsQuery.findObjects()
-//            print(parseEventLocations.count)
-//            addPoints();
-//        }
-//        catch{
-//            print("Get events failed")
-//        }
     }
     
     func addPoints(){
@@ -79,10 +82,14 @@ class PicMapViewController: UIViewController {
             let annotation = MKPointAnnotation()
             annotation.coordinate = CLLocationCoordinate2DMake(point.latitude, point.longitude)
             annotation.title = post["eventName"] as! String
-            
             self.mapView.addAnnotation(annotation)
         }
+        parseEventLocations = []
     }
+     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+    }
+    
 
     /*
     // MARK: - Navigation

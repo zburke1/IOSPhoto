@@ -9,18 +9,60 @@
 
 import UIKit
 import Parse
+import ParseUI
+import Bolts
 
-class SingleEventController: UIViewController {
-    
+class SingleEventController: UIViewController,UICollectionViewDelegateFlowLayout,UICollectionViewDelegate, UICollectionViewDataSource {
+    var parseEvents = [PFObject]()
     var imageCount = 0;
     var currentEvent : PFObject?
     
+    @IBOutlet weak var collectionView: UICollectionView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        print(currentEvent!["eventName"])
+        
+        let cellWidth = ((UIScreen.mainScreen().bounds.width) - 32 - 30 ) / 7
+        let cellLayout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
+        cellLayout.itemSize = CGSize(width: cellWidth, height: cellWidth)
+        loadCollectionViewData()
     }
     
+    override func viewWillDisappear(animated: Bool) {
+        print("Cleaning Collection Memory")
+        self.collectionView.delegate = nil
+        self.collectionView.removeFromSuperview()
+        self.collectionView = nil;
+    }
+    
+    
+    func loadCollectionViewData(){
+        let query = PFQuery(className:"EventImages")
+        query.includeKey("Events")
+        var queryImages = query.whereKey("Events", equalTo: currentEvent!)
+        
+        query.findObjectsInBackgroundWithBlock{(objects: [PFObject]?, error: NSError?) -> Void in
+            
+            // The find succeeded now rocess the found objects into the countries array
+            if error == nil {
+                
+                
+                // Add country objects to our array
+                if var objects = objects as [PFObject]!{
+                    objects = objects.reverse()
+                    self.parseEvents = objects + self.parseEvents
+                    
+                }
+                self.collectionView!.reloadData()
+                
+                
+            } else {
+                // Log details of the failure
+                print(error?.description)
+            }
+            
+        }
+        
+    }
     
     @IBAction func takePictureSelected(sender: AnyObject) {
         
@@ -32,8 +74,57 @@ class SingleEventController: UIViewController {
     }
     
     
+    //                                                              //
+    //==============================================================//
+    //Collection View                                               //
+    //==============================================================//
+    //                                                              //
+    
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return parseEvents.count
+    }
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Cell", forIndexPath: indexPath) as! ControllerCell
+        
+        // Display the country name
+        if let value = parseEvents[indexPath.row].createdAt {
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateStyle = NSDateFormatterStyle.ShortStyle
+            dateFormatter.timeStyle = .ShortStyle
+            let date = dateFormatter.stringFromDate(value)
+            cell.customTitle.text = date
+            print("TEST")
+        }
+        
+        
+        cell.customImage.image = UIImage(named: "imgPlaceholder.jpg")
+        // initialThumbnail = nil
+        cell.customImage.file = parseEvents[indexPath.row]["Image"] as? PFFile
+        // remote image
+        
+        cell.customImage.loadInBackground()
+        return cell
+    }
     
     
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        let currentObject = parseEvents[indexPath.row]
+        performSegueWithIdentifier("EventSelectedSegue", sender: currentObject)
+    }
+    
+    //                                                              //
+    //==============================================================//
+    //Cleaning Code                                                 //
+    //==============================================================//
+    //                                                              //
+ 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

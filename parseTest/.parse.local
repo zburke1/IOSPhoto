@@ -1,0 +1,10 @@
+{
+  "applications": {
+    "_default": {
+      "link": "finalProject"
+    },
+    "finalProject": {
+      "applicationId": "mOY4e4zFcqLrBWpyFhw7xXPquPlXaKyKNCnO2Fgg"
+    }
+  }
+}

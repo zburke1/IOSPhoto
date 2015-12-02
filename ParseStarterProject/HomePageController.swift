@@ -29,9 +29,11 @@ class HomePageController: UIViewController,UICollectionViewDelegateFlowLayout,UI
         
     }
     
-    
-    override func viewDidAppear(animated: Bool) {
-        
+    override func viewWillDisappear(animated: Bool) {
+        print("Cleaning Collection Memory")
+        self.collectionView.delegate = nil
+        self.collectionView.removeFromSuperview()
+        self.collectionView = nil;
     }
     
     
@@ -85,8 +87,6 @@ class HomePageController: UIViewController,UICollectionViewDelegateFlowLayout,UI
             cell.customTitle.text = value
         }
         
-        // Display "initial" flag image
-//        var initialThumbnail = UIImage(named: "imgPlaceholder.jpg")
         
         cell.customImage.image = UIImage(named: "imgPlaceholder.jpg")
        // initialThumbnail = nil
@@ -94,20 +94,6 @@ class HomePageController: UIViewController,UICollectionViewDelegateFlowLayout,UI
         // remote image
         
          cell.customImage.loadInBackground()
-//        // Fetch final flag image - if it exists
-//            var finalImage = parseEvents[indexPath.row]["eventThumb"] as! PFFile
-//            finalImage.getDataInBackgroundWithBlock {
-//                (imageData: NSData?, error: NSError?) -> Void in
-//                if error == nil {
-//                    if let imageData = imageData {
-//                        var image = UIImage(data:imageData)
-//                        cell.customImage.image = image!
-//                        image = nil
-//                    
-//                }
-//            }
-//        }
-        
         return cell
     }
     
