@@ -35,6 +35,8 @@
 		91BCD0CB1BEFFB850087B344 /* SingupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BCD0CA1BEFFB850087B344 /* SingupViewController.swift */; };
 		91BCD0CD1BEFFDF00087B344 /* background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 91BCD0CC1BEFFDF00087B344 /* background.jpg */; };
 		91BCD0CE1BEFFE070087B344 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 814C3AC61B69877600E307BB /* Main.storyboard */; };
+		91F3BC3B1C0F5DA9006840C1 /* PictureAuthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F3BC3A1C0F5DA9006840C1 /* PictureAuthController.swift */; };
+		91F3BC3D1C0F6487006840C1 /* Legalese.png in Resources */ = {isa = PBXBuildFile; fileRef = 91F3BC3C1C0F6487006840C1 /* Legalese.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -71,6 +73,8 @@
 		91BCD0C81BEFF5080087B344 /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = images; sourceTree = "<group>"; };
 		91BCD0CA1BEFFB850087B344 /* SingupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingupViewController.swift; sourceTree = "<group>"; };
 		91BCD0CC1BEFFDF00087B344 /* background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = background.jpg; path = images/background.jpg; sourceTree = "<group>"; };
+		91F3BC3A1C0F5DA9006840C1 /* PictureAuthController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PictureAuthController.swift; sourceTree = "<group>"; };
+		91F3BC3C1C0F6487006840C1 /* Legalese.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Legalese.png; path = ../../../../Desktop/Legalese.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +109,7 @@
 		81BA813C1A49DA1800E65899 = {
 			isa = PBXGroup;
 			children = (
+				91F3BC3C1C0F6487006840C1 /* Legalese.png */,
 				91AECFC41C0EC8BA000DFDC4 /* test.m */,
 				912E2F2D1C0E5F2300B7C5A4 /* PicMapViewController.swift */,
 				912E2F231C0E2A6300B7C5A4 /* frame.jpg */,
@@ -142,6 +147,7 @@
 				912E2F251C0E2DB200B7C5A4 /* EventCreationController.swift */,
 				912E2F291C0E3FBA00B7C5A4 /* SingleEventController.swift */,
 				912E2F2B1C0E46A400B7C5A4 /* TakePictureController.swift */,
+				91F3BC3A1C0F5DA9006840C1 /* PictureAuthController.swift */,
 			);
 			path = ParseStarterProject;
 			sourceTree = "<group>";
@@ -237,6 +243,7 @@
 				912E2F241C0E2A6300B7C5A4 /* frame.jpg in Resources */,
 				912E2F221C0E294100B7C5A4 /* ufBars.jpg in Resources */,
 				9154905E1C0DFAA700098F4B /* Header.png in Resources */,
+				91F3BC3D1C0F6487006840C1 /* Legalese.png in Resources */,
 				91BCD0CE1BEFFE070087B344 /* Main.storyboard in Resources */,
 				814C3ACB1B69877600E307BB /* Images.xcassets in Resources */,
 				912E2F201C0E234300B7C5A4 /* imgPlaceholder.jpg in Resources */,
@@ -269,6 +276,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				81BA814D1A49DA1800E65899 /* ViewController.swift in Sources */,
+				91F3BC3B1C0F5DA9006840C1 /* PictureAuthController.swift in Sources */,
 				912E2F261C0E2DB200B7C5A4 /* EventCreationController.swift in Sources */,
 				915490601C0DFEBA00098F4B /* ControllerCell.swift in Sources */,
 				912E2F2C1C0E46A400B7C5A4 /* TakePictureController.swift in Sources */,
