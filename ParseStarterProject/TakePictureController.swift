@@ -106,7 +106,7 @@ class TakePictureController: UIViewController,UIImagePickerControllerDelegate, U
             retakeButton.enabled = true
             goButton.enabled = true
             self.dismissViewControllerAnimated(true, completion: nil)
-            
+            fadeInSwipe()
         }
     }
     
@@ -254,6 +254,7 @@ class TakePictureController: UIViewController,UIImagePickerControllerDelegate, U
                     postPicture()
                 }
                 else{
+                    imageCount = Int(amountOfPeople.text!)!
                     postPicture()
                 }
                 
@@ -275,6 +276,8 @@ class TakePictureController: UIViewController,UIImagePickerControllerDelegate, U
                         postPicture()
                     }
                     else{
+                        imageCount = Int(amountOfPeople.text!)!
+                        print("Number of people: " + amountOfPeople.text!)
                         postPicture()
                     }
                 }

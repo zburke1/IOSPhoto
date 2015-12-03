@@ -36,7 +36,7 @@ Parse.Cloud.define("MailGunSend",function(request,response){
 		  from: "zburke1@ufl.edu",
 		  subject: "Thanks for taking a picture",
 		  text: "We enjoyed seeing you at the event. Attached is your image!",
-		  html: '<html><body><img src="' + request.params.imageUrl + '"></body></html>'
+		  html: '<html><body>We enjoyed seeing you at the event. Attached is your image!<br> <img src="' + request.params.imageUrl + '"></body></html>'
 		}, {
 		  success: function(httpResponse) {
 		    console.log(httpResponse);
