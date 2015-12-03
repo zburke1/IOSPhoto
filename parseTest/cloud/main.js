@@ -30,25 +30,27 @@ Parse.Cloud.define("MailGunSend",function(request,response){
 		  console.log("could not add");
 	  }
 		
+	}).then(function(){
+		Mailgun.sendEmail({
+		  to: toEmailString,
+		  from: "zburke1@ufl.edu",
+		  subject: "Thanks for taking a picture",
+		  text: "We enjoyed seeing you at the event. Attached is your image!",
+		  html: '<html><body><img src="' + request.params.imageUrl + '"></body></html>'
+		}, {
+		  success: function(httpResponse) {
+		    console.log(httpResponse);
+		    response.success("Email sent!");
+		  },
+		  error: function(httpResponse) {
+		    console.error(httpResponse);
+		    response.error("Uh oh, something went wrong");
+		  }
+		});
 	});
 	
 	
-	Mailgun.sendEmail({
-	  to: toEmailString,
-	  from: "zburke1@ufl.edu",
-	  subject: "Thanks for taking a picture",
-	  text: "We enjoyed seeing you at the event. Attached is your image!",
-	  html: '<html><body><img src="' + request.params.imageUrl + '"></body></html>'
-	}, {
-	  success: function(httpResponse) {
-	    console.log(httpResponse);
-	    response.success("Email sent!");
-	  },
-	  error: function(httpResponse) {
-	    console.error(httpResponse);
-	    response.error("Uh oh, something went wrong");
-	  }
-	});
+	
 	
 });
 
