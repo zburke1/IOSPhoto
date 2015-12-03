@@ -37,6 +37,11 @@ class TakePictureController: UIViewController,UIImagePickerControllerDelegate, U
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var progressSpinner: UIActivityIndicatorView!
     
+    
+    @IBOutlet weak var swipeOverlay: UIImageView!
+    
+    
+    
     var picker = UIImagePickerController()
    
     
@@ -101,6 +106,7 @@ class TakePictureController: UIViewController,UIImagePickerControllerDelegate, U
             retakeButton.enabled = true
             goButton.enabled = true
             self.dismissViewControllerAnimated(true, completion: nil)
+            
         }
        
 
@@ -117,7 +123,9 @@ class TakePictureController: UIViewController,UIImagePickerControllerDelegate, U
             imageTaken = true
             retakeButton.enabled = true
             goButton.enabled = true
-                   } else {
+            fadeInSwipe()
+        }
+        else {
             print("FAILED TO SAVE")
    
         }
@@ -143,6 +151,24 @@ class TakePictureController: UIViewController,UIImagePickerControllerDelegate, U
 //        }
         
         
+    }
+    
+    func fadeInSwipe(){
+        self.swipeOverlay.hidden = false
+        self.swipeOverlay.alpha=0
+        UIView.animateWithDuration(2, delay:1, options:UIViewAnimationOptions.TransitionFlipFromTop, animations: {
+            self.swipeOverlay.alpha = 1
+            }, completion: { finished in
+               self.fadeOutSwipe()
+        })
+    }
+    
+    func fadeOutSwipe(){
+        UIView.animateWithDuration(1, delay:1, options:UIViewAnimationOptions.TransitionFlipFromTop, animations: {
+            self.swipeOverlay.alpha = 0
+            }, completion: { finished in
+                self.swipeOverlay.hidden=true
+        })
     }
     
     func postPicture(){

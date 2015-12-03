@@ -18,6 +18,8 @@ class SingleEventController: UIViewController,UICollectionViewDelegateFlowLayout
     var currentEvent : PFObject?
     var selectedImage : PFObject?
     
+    @IBOutlet weak var eventNameLabel: UILabel!
+    
     @IBOutlet weak var collectionView: UICollectionView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +27,7 @@ class SingleEventController: UIViewController,UICollectionViewDelegateFlowLayout
         let cellWidth = ((UIScreen.mainScreen().bounds.width) - 32 - 30 ) / 7
         let cellLayout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
         cellLayout.itemSize = CGSize(width: cellWidth, height: cellWidth)
+        eventNameLabel.text = currentEvent!["eventName"] as! String
         loadCollectionViewData()
     }
     
