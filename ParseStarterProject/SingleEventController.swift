@@ -16,6 +16,7 @@ class SingleEventController: UIViewController,UICollectionViewDelegateFlowLayout
     var parseEvents = [PFObject]()
     var imageCount = 0;
     var currentEvent : PFObject?
+    var selectedImage : PFObject?
     
     @IBOutlet weak var collectionView: UICollectionView!
     override func viewDidLoad() {
@@ -64,6 +65,8 @@ class SingleEventController: UIViewController,UICollectionViewDelegateFlowLayout
         
     }
     
+    
+    
     @IBAction func takePictureSelected(sender: AnyObject) {
         
         
@@ -99,7 +102,6 @@ class SingleEventController: UIViewController,UICollectionViewDelegateFlowLayout
             dateFormatter.timeStyle = .ShortStyle
             let date = dateFormatter.stringFromDate(value)
             cell.customTitle.text = date
-            print("TEST")
         }
         
         
@@ -115,8 +117,8 @@ class SingleEventController: UIViewController,UICollectionViewDelegateFlowLayout
     
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let currentObject = parseEvents[indexPath.row]
-        performSegueWithIdentifier("EventSelectedSegue", sender: currentObject)
+        selectedImage = parseEvents[indexPath.row]
+        performSegueWithIdentifier("EventImageSelectedSegue", sender:self)
     }
     
     //                                                              //
@@ -135,6 +137,11 @@ class SingleEventController: UIViewController,UICollectionViewDelegateFlowLayout
         {
             let svc = segue.destinationViewController as! TakePictureController;
             svc.currentEvent = currentEvent
+        }
+        else if segue.identifier == "EventImageSelectedSegue" {
+            let svc = segue.destinationViewController as! SinglePicViewController;
+            svc.currentEvent = currentEvent
+            svc.imageShown = selectedImage
         }
     }
 }

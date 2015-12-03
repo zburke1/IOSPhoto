@@ -118,16 +118,16 @@ class TakePictureController: UIViewController,UIImagePickerControllerDelegate, U
     
     @IBAction func retakeButton(sender: AnyObject) {
         
-        let parameters = ["": ""]	
-        PFCloud.callFunctionInBackground("SendGrid", withParameters: parameters) { results, error in
-            if error != nil {
-                // Your error handling here
-                print("Success")
-            } else {
-                // Deal with your results (votes in your case) here.
-                print("Fail")
-            }
-        }
+//        let parameters = ["": ""]	
+//        PFCloud.callFunctionInBackground("SendGrid", withParameters: parameters) { results, error in
+//            if error != nil {
+//                // Your error handling here
+//                print("Success")
+//            } else {
+//                // Deal with your results (votes in your case) here.
+//                print("Fail")
+//            }
+//        }
         
         
     }

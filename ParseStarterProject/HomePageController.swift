@@ -14,7 +14,8 @@ import Bolts
 
 class HomePageController: UIViewController,UICollectionViewDelegateFlowLayout,UICollectionViewDelegate, UICollectionViewDataSource {
     
-
+   
+    var currentObject : PFObject?
    var parseEvents = [PFObject]()
     
     @IBOutlet weak var collectionView: UICollectionView!
@@ -100,15 +101,16 @@ class HomePageController: UIViewController,UICollectionViewDelegateFlowLayout,UI
     
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let currentObject = parseEvents[indexPath.row]
-        performSegueWithIdentifier("EventSelectedSegue", sender: currentObject)
+        currentObject = parseEvents[indexPath.row] as PFObject
+        performSegueWithIdentifier("EventSelectedSegue", sender:
+ self)
     }
     
-    //                                                              //
+    
     //==============================================================//
     //Collection View                                               //
     //==============================================================//
-    //                                                              //
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -122,15 +124,8 @@ class HomePageController: UIViewController,UICollectionViewDelegateFlowLayout,UI
         NSURLCache.sharedURLCache().removeAllCachedResponses()
         if segue.identifier == "EventSelectedSegue"
         {
-            var currentObject : PFObject?
-            if let event = sender as? PFObject{
-                currentObject = sender as? PFObject
-            }
-            else {
-                // No cell selected in collectionView - must be a new country record being created
-            }
             let singleScene = segue.destinationViewController as! SingleEventController
-            singleScene.currentEvent = (currentObject)
+            singleScene.currentEvent = currentObject
             
         }
     }
