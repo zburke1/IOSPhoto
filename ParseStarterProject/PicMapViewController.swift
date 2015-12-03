@@ -20,6 +20,11 @@ class PicMapViewController: UIViewController,MKMapViewDelegate {
         // Do any additional setup after loading the view.
     }
     
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        let orientation: UIInterfaceOrientationMask = [UIInterfaceOrientationMask.LandscapeLeft, UIInterfaceOrientationMask.LandscapeRight]
+        return orientation
+    }
+    
     override func viewWillDisappear(animated: Bool) {
         print("Cleaning Map Memory")
         switch (self.mapView.mapType) {

@@ -28,6 +28,10 @@ class EventCreationController: UIViewController,CLLocationManagerDelegate {
         getLocation()
     }
     
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        let orientation: UIInterfaceOrientationMask = [UIInterfaceOrientationMask.LandscapeLeft, UIInterfaceOrientationMask.LandscapeRight]
+        return orientation
+    }
     
     
     override func didReceiveMemoryWarning() {

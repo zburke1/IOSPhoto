@@ -51,6 +51,11 @@ class PictureAuthController: UIViewController,UIImagePickerControllerDelegate, U
         numTotalLabel.text = String(currentSignerNum) + " signed / " + String(imageCount) + " total"
     }
     
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        let orientation: UIInterfaceOrientationMask = [UIInterfaceOrientationMask.LandscapeLeft, UIInterfaceOrientationMask.LandscapeRight]
+        return orientation
+    }
+    
     func saveSignature(){
         if(fullNameText.text != "" && emailText.text != ""){
             

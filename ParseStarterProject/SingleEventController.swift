@@ -31,6 +31,11 @@ class SingleEventController: UIViewController,UICollectionViewDelegateFlowLayout
         loadCollectionViewData()
     }
     
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        let orientation: UIInterfaceOrientationMask = [UIInterfaceOrientationMask.LandscapeLeft, UIInterfaceOrientationMask.LandscapeRight]
+        return orientation
+    }
+    
     override func viewWillDisappear(animated: Bool) {
         print("Cleaning Collection Memory")
         self.collectionView.delegate = nil

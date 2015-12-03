@@ -28,12 +28,18 @@ class SinglePicViewController: UIViewController {
             isAuthorizedSwitch.setOn(true, animated: false)
         }
         
+        
         findPeople();
         
         singleImageView.image = UIImage(named: "imgPlaceholder.jpg")
         singleImageView.file = imageShown!["Image"] as? PFFile
         singleImageView.loadInBackground()
         // Do any additional setup after loading the view.
+    }
+    
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        let orientation: UIInterfaceOrientationMask = [UIInterfaceOrientationMask.LandscapeLeft, UIInterfaceOrientationMask.LandscapeRight]
+        return orientation
     }
 
     override func didReceiveMemoryWarning() {
