@@ -28,6 +28,9 @@
 		9154905D1C0DFAA700098F4B /* Footer.png in Resources */ = {isa = PBXBuildFile; fileRef = 9154905B1C0DFAA700098F4B /* Footer.png */; };
 		9154905E1C0DFAA700098F4B /* Header.png in Resources */ = {isa = PBXBuildFile; fileRef = 9154905C1C0DFAA700098F4B /* Header.png */; };
 		915490601C0DFEBA00098F4B /* ControllerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9154905F1C0DFEBA00098F4B /* ControllerCell.swift */; };
+		91A62DD51C0FF32D003642C6 /* gatorsFrame.png in Resources */ = {isa = PBXBuildFile; fileRef = 91A62DD41C0FF32D003642C6 /* gatorsFrame.png */; };
+		91A62DDB1C0FF42B003642C6 /* bothFrame.png in Resources */ = {isa = PBXBuildFile; fileRef = 91A62DDA1C0FF42B003642C6 /* bothFrame.png */; };
+		91A62DDD1C0FF56A003642C6 /* albertFrame.png in Resources */ = {isa = PBXBuildFile; fileRef = 91A62DDC1C0FF56A003642C6 /* albertFrame.png */; };
 		91AECFC51C0EC8BA000DFDC4 /* test.m in Sources */ = {isa = PBXBuildFile; fileRef = 91AECFC41C0EC8BA000DFDC4 /* test.m */; };
 		91AECFC71C0ECA4A000DFDC4 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91AECFC61C0ECA4A000DFDC4 /* Parse.framework */; };
 		91AECFC91C0ECA61000DFDC4 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91AECFC81C0ECA61000DFDC4 /* ParseUI.framework */; };
@@ -67,6 +70,9 @@
 		9154905B1C0DFAA700098F4B /* Footer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Footer.png; path = images/Footer.png; sourceTree = "<group>"; };
 		9154905C1C0DFAA700098F4B /* Header.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Header.png; path = images/Header.png; sourceTree = "<group>"; };
 		9154905F1C0DFEBA00098F4B /* ControllerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControllerCell.swift; sourceTree = "<group>"; };
+		91A62DD41C0FF32D003642C6 /* gatorsFrame.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gatorsFrame.png; path = images/gatorsFrame.png; sourceTree = "<group>"; };
+		91A62DDA1C0FF42B003642C6 /* bothFrame.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bothFrame.png; path = images/bothFrame.png; sourceTree = "<group>"; };
+		91A62DDC1C0FF56A003642C6 /* albertFrame.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = albertFrame.png; path = images/albertFrame.png; sourceTree = "<group>"; };
 		91AECFC31C0EC8BA000DFDC4 /* IOSPhoto-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "IOSPhoto-Bridging-Header.h"; sourceTree = "<group>"; };
 		91AECFC41C0EC8BA000DFDC4 /* test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = test.m; path = ParseStarterProject/test.m; sourceTree = "<group>"; };
 		91AECFC61C0ECA4A000DFDC4 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
@@ -115,9 +121,12 @@
 				91AECFC41C0EC8BA000DFDC4 /* test.m */,
 				912E2F231C0E2A6300B7C5A4 /* frame.jpg */,
 				912E2F211C0E294100B7C5A4 /* ufBars.jpg */,
+				91A62DDC1C0FF56A003642C6 /* albertFrame.png */,
 				912E2F1F1C0E234300B7C5A4 /* imgPlaceholder.jpg */,
 				9154905B1C0DFAA700098F4B /* Footer.png */,
+				91A62DDA1C0FF42B003642C6 /* bothFrame.png */,
 				9154905C1C0DFAA700098F4B /* Header.png */,
+				91A62DD41C0FF32D003642C6 /* gatorsFrame.png */,
 				91BCD0CC1BEFFDF00087B344 /* background.jpg */,
 				91BCD0C81BEFF5080087B344 /* images */,
 				81BA81471A49DA1800E65899 /* ParseStarterProject */,
@@ -241,11 +250,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				91A62DDB1C0FF42B003642C6 /* bothFrame.png in Resources */,
+				91A62DD51C0FF32D003642C6 /* gatorsFrame.png in Resources */,
 				91BCD0CD1BEFFDF00087B344 /* background.jpg in Resources */,
 				9154905D1C0DFAA700098F4B /* Footer.png in Resources */,
 				912E2F241C0E2A6300B7C5A4 /* frame.jpg in Resources */,
 				912E2F221C0E294100B7C5A4 /* ufBars.jpg in Resources */,
 				9154905E1C0DFAA700098F4B /* Header.png in Resources */,
+				91A62DDD1C0FF56A003642C6 /* albertFrame.png in Resources */,
 				91F3BC3D1C0F6487006840C1 /* Legalese.png in Resources */,
 				91BCD0CE1BEFFE070087B344 /* Main.storyboard in Resources */,
 				814C3ACB1B69877600E307BB /* Images.xcassets in Resources */,

@@ -168,10 +168,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgPlaceholder.jpg" id="HSb-kk-Mym">
-                                <rect key="frame" x="20" y="189" width="482" height="356"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number of Pariticipants" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="OPA-qK-Bz8">
                                 <rect key="frame" x="551" y="271" width="181" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -241,6 +237,14 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             </textField>
+                            <imageView multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgPlaceholder.jpg" id="HSb-kk-Mym">
+                                <rect key="frame" x="20" y="189" width="482" height="356"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="e3m-aO-rD7" userLabel="OverlayImg">
+                                <rect key="frame" x="20" y="189" width="482" height="356"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -251,6 +255,7 @@
                         <outlet property="cancelButton" destination="dhe-CC-bKh" id="B7p-1U-DSg"/>
                         <outlet property="goButton" destination="pWg-2t-u5x" id="PWG-uF-Du1"/>
                         <outlet property="mediaSwitch" destination="zHJ-Gl-4mc" id="5zt-hw-MFf"/>
+                        <outlet property="overlayImgView" destination="e3m-aO-rD7" id="yet-7F-tX9"/>
                         <outlet property="progressSpinner" destination="HCy-RH-oWD" id="P5i-yY-IRV"/>
                         <outlet property="retakeButton" destination="9Vj-pC-57t" id="w4P-aK-QHg"/>
                         <segue destination="efd-gS-Vl6" kind="modal" identifier="pictureNoAuthSegue" id="VVS-O4-Cwt"/>
@@ -763,7 +768,7 @@
         <image name="ufBars.jpg" width="1600" height="1200"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="9Ze-73-VKs"/>
+        <segue reference="m6R-EX-uPd"/>
         <segue reference="Y20-18-WZU"/>
     </inferredMetricsTieBreakers>
 </document>

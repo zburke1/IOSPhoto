@@ -22,7 +22,13 @@ class TakePictureController: UIViewController,UIImagePickerControllerDelegate, U
     var mediaSwitchCheck = false
     var postQuick = true
     var imagePosted = ""
+    var frameIndex = 0
+    var frame1 = UIImage()
+    var frame2 = UIImage()
+    var frame3 = UIImage()
+    var frameArray = [UIImage(named:"albertFrame.png"),UIImage(named:"gatorsFrame.png"),UIImage(named:"bothFrame.png")]
     
+    @IBOutlet weak var overlayImgView: UIImageView!
     @IBOutlet weak var retakeButton: UIButton!
     @IBOutlet weak var goButton: UIButton!
     @IBOutlet weak var mediaSwitch: UISwitch!
@@ -37,6 +43,7 @@ class TakePictureController: UIViewController,UIImagePickerControllerDelegate, U
     @IBOutlet weak var ImageFrame: UIImageView!
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         print(currentEvent!["eventName"])
         
@@ -117,6 +124,12 @@ class TakePictureController: UIViewController,UIImagePickerControllerDelegate, U
     }
     
     @IBAction func retakeButton(sender: AnyObject) {
+        view.endEditing(true)
+        overlayImgView.image = nil
+        frameIndex = 0
+        openCamera()
+        
+        
         
 //        let parameters = ["": ""]	
 //        PFCloud.callFunctionInBackground("SendGrid", withParameters: parameters) { results, error in
@@ -137,6 +150,21 @@ class TakePictureController: UIViewController,UIImagePickerControllerDelegate, U
             retakeButton.enabled = false
             goButton.enabled = false
             cancelButton.enabled = false
+        
+        //////////////////////////////////////////////////////////////////////////////////////////
+        //Overlay Image Creation
+        //////////////////////////////////////////////////////////////////////////////////////////
+            UIGraphicsBeginImageContext(ImageFrame.frame.size)
+        ImageFrame.image?.drawInRect(CGRect(x: 0, y: 0, width: ImageFrame.frame.size.width, height: ImageFrame.frame.size.height), blendMode: CGBlendMode.Normal, alpha: 1.0)
+        overlayImgView.image?.drawInRect(CGRect(x: 0, y:  0, width: overlayImgView.frame.size.width, height: overlayImgView.frame.size.height), blendMode: CGBlendMode.Normal, alpha: 1.0)
+        ImageFrame.image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        overlayImgView.image = nil
+            UIGraphicsEndImageContext()
+        //////////////////////////////////////////////////////////////////////////////////////////
+        
+        //////////////////////////////////////////////////////////////////////////////////////////
+        
             let imageUpload = PFObject(className: "EventImages")
             imageUpload["amountOfPeople"] = Int(amountOfPeople!.text!)
             
@@ -287,7 +315,45 @@ class TakePictureController: UIViewController,UIImagePickerControllerDelegate, U
         
         if CGRectContainsPoint(self.ImageFrame.frame, gesture.locationInView(self.view))
         {
-            print("low e")
+            if(gesture.direction == .Left){
+                if(frameIndex==0){
+                overlayImgView.image = frameArray[0]
+                frameIndex++
+                }
+                else if(frameIndex==1){
+                    overlayImgView.image = frameArray[1]
+                    frameIndex++
+                }
+                else if(frameIndex==2){
+                    overlayImgView.image = frameArray[2]
+                    frameIndex++
+                }
+                else{
+                    overlayImgView.image = nil
+                    frameIndex=0
+                }
+                
+                
+            }
+            else{
+                if(frameIndex==0){
+                    overlayImgView.image = frameArray[2]
+                    frameIndex=3
+                }
+                else if(frameIndex==3){
+                    overlayImgView.image = frameArray[1]
+                    frameIndex = 2
+                }
+                else if(frameIndex==2){
+                    overlayImgView.image = frameArray[0]
+                    frameIndex = 1
+                }
+                
+                else{
+                    overlayImgView.image = nil
+                    frameIndex=0
+                }
+            }
         }
 }
 }
