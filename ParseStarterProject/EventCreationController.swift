@@ -36,6 +36,7 @@ class EventCreationController: UIViewController,CLLocationManagerDelegate {
     }
     
     @IBAction func CreateEvent(sender: AnyObject) {
+        if(EventTitle.text != "" && EventDescription != ""){
         let event = PFObject(className: "Events")
         if(MapCheck.on){
             getLocation();
@@ -84,6 +85,17 @@ class EventCreationController: UIViewController,CLLocationManagerDelegate {
             }
         }
         
+    }
+        else{
+            if #available(iOS 8.0, *) {
+                let alertController = UIAlertController(title: "Warning", message: "Please fill in all text fields", preferredStyle: .Alert)
+                let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                alertController.addAction(defaultAction)
+                presentViewController(alertController, animated: true, completion: nil)
+            } else {
+                // Fallback on earlier versions
+            }
+        }
     }
     
     

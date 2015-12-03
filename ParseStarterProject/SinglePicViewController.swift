@@ -71,12 +71,39 @@ class SinglePicViewController: UIViewController {
             if error == nil {
                 // Your error handling here
                 print("Success sending email function")
+               self.emailSendSuccess()
             } else {
                 // Deal with your results (votes in your case) here.
                 print("Fail")
+                self.emailSendFail()
             }
         }
 
+    }
+    
+    
+    func emailSendSuccess(){
+        if #available(iOS 8.0, *) {
+            let alertController = UIAlertController(title: "Success", message: "Your email is on the way", preferredStyle: .Alert)
+            let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+            alertController.addAction(defaultAction)
+            presentViewController(alertController, animated: true, completion: nil)
+        } else {
+            // Fallback on earlier versions
+        }
+        
+        
+    }
+    
+    func emailSendFail(){
+        if #available(iOS 8.0, *) {
+            let alertController = UIAlertController(title: "Email failed", message: "Your email failed. Try sending it through the print option instead.", preferredStyle: .Alert)
+            let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+            alertController.addAction(defaultAction)
+            presentViewController(alertController, animated: true, completion: nil)
+        } else {
+            // Fallback on earlier versions
+        }
     }
     
     @IBAction func printImageButton(sender: AnyObject) {

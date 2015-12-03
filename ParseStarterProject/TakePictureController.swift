@@ -108,12 +108,9 @@ class TakePictureController: UIViewController,UIImagePickerControllerDelegate, U
             self.dismissViewControllerAnimated(true, completion: nil)
             
         }
-       
-
-        
     }
     
-
+ 
     
     func image(image: UIImage, didFinishSavingWithError error:NSError?, contextInfo: UnsafePointer<Void>)
     {
@@ -137,26 +134,14 @@ class TakePictureController: UIViewController,UIImagePickerControllerDelegate, U
         frameIndex = 0
         openCamera()
         
-        
-        
-//        let parameters = ["": ""]	
-//        PFCloud.callFunctionInBackground("SendGrid", withParameters: parameters) { results, error in
-//            if error != nil {
-//                // Your error handling here
-//                print("Success")
-//            } else {
-//                // Deal with your results (votes in your case) here.
-//                print("Fail")
-//            }
-//        }
-        
+ 
         
     }
     
     func fadeInSwipe(){
         self.swipeOverlay.hidden = false
         self.swipeOverlay.alpha=0
-        UIView.animateWithDuration(2, delay:1, options:UIViewAnimationOptions.TransitionFlipFromTop, animations: {
+        UIView.animateWithDuration(1, delay:0.8, options:UIViewAnimationOptions.TransitionFlipFromTop, animations: {
             self.swipeOverlay.alpha = 1
             }, completion: { finished in
                self.fadeOutSwipe()
@@ -164,7 +149,7 @@ class TakePictureController: UIViewController,UIImagePickerControllerDelegate, U
     }
     
     func fadeOutSwipe(){
-        UIView.animateWithDuration(1, delay:1, options:UIViewAnimationOptions.TransitionFlipFromTop, animations: {
+        UIView.animateWithDuration(0.7, delay:0.6, options:UIViewAnimationOptions.TransitionFlipFromTop, animations: {
             self.swipeOverlay.alpha = 0
             }, completion: { finished in
                 self.swipeOverlay.hidden=true
@@ -257,13 +242,21 @@ class TakePictureController: UIViewController,UIImagePickerControllerDelegate, U
             if(amountOfPeople.text=="0" || amountOfPeople.text==""){
                 amountOfPeople.text = "0"
                 postQuick = true
-                postPicture();
+                postPicture()
             }
             else{
                 postQuick = false
-                let countText = amountOfPeople.text!
-                imageCount = Int(countText)!
-                postPicture();
+                
+                
+                if(Int(amountOfPeople!.text!) == nil){
+                    postQuick = true
+                    amountOfPeople.text = "0"
+                    postPicture()
+                }
+                else{
+                    postPicture()
+                }
+                
             }
         }
         else{
@@ -275,14 +268,16 @@ class TakePictureController: UIViewController,UIImagePickerControllerDelegate, U
                 }
                 else{
                     postQuick = false
-                    let countText = amountOfPeople.text!
-                    imageCount = Int(countText)!
-                    postPicture();
+                    
+                    if(Int(amountOfPeople!.text!) == nil){
+                        postQuick = true
+                        amountOfPeople.text = "0"
+                        postPicture()
+                    }
+                    else{
+                        postPicture()
+                    }
                 }
-            
-            
-            
-           
         }
     }
     
