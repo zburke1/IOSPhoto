@@ -8,6 +8,7 @@
 
 import UIKit
 import ParseUI
+import MobileCoreServices
 
 class SinglePicViewController: UIViewController {
 
@@ -78,7 +79,31 @@ class SinglePicViewController: UIViewController {
     }
     
     @IBAction func printImageButton(sender: AnyObject) {
-    
+        
+        let image = singleImageView.image
+        let printInfo = UIPrintInfo.printInfo()
+        printInfo.outputType = .Photo
+        printInfo.jobName = "EventPrint"
+        let printActivityItems: [AnyObject] = [
+            printInfo,
+            image!
+        ]
+        
+        
+        var controller: UIActivityViewController = UIActivityViewController(activityItems: printActivityItems, applicationActivities: nil)
+        if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.Phone {
+            self.presentViewController(controller, animated: true, completion: nil)
+        }
+        else {
+            var popup: UIPopoverController = UIPopoverController(contentViewController: controller)
+            popup.presentPopoverFromRect(CGRectMake(self.view.frame.size.width / 2, self.view.frame.size.height / 4, 0, 0), inView: self.view, permittedArrowDirections: UIPopoverArrowDirection.Any , animated: true)
+        }
+        
+        
+//        
+//        let activityViewController = UIActivityViewController(activityItems: printActivityItems, applicationActivities: nil)
+//        presentViewController(activityViewController, animated: false, completion: nil)
+        
     }
     
     @IBAction func BackButton(sender: AnyObject) {

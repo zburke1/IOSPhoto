@@ -751,7 +751,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bI8-gu-J8T" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="555" y="3632"/>
+            <point key="canvasLocation" x="555" y="3647"/>
         </scene>
     </scenes>
     <resources>
@@ -763,7 +763,7 @@
         <image name="ufBars.jpg" width="1600" height="1200"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="hM0-uK-9Vp"/>
-        <segue reference="AGd-fR-zd7"/>
+        <segue reference="9Ze-73-VKs"/>
+        <segue reference="Y20-18-WZU"/>
     </inferredMetricsTieBreakers>
 </document>
