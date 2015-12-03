@@ -267,6 +267,7 @@ class TakePictureController: UIViewController,UIImagePickerControllerDelegate, U
     
     
     func tapped(gesture: UITapGestureRecognizer){
+         view.endEditing(true)
         
         if CGRectContainsPoint(self.ImageFrame.frame,gesture.locationInView(self.view))
         {

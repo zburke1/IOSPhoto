@@ -59,9 +59,6 @@ class PicMapViewController: UIViewController,MKMapViewDelegate {
             
             // The find succeeded now rocess the found objects into the countries array
             if error == nil {
-
-                
-                // Add country objects to our array
                 if let objects = objects {
                     self.parseEventLocations = Array(objects.generate())
                 }
@@ -77,9 +74,11 @@ class PicMapViewController: UIViewController,MKMapViewDelegate {
     }
     
     func addPoints(){
+        print(parseEventLocations.count)
         for post in parseEventLocations {
             let point = post["eventLocation"] as! PFGeoPoint
             let annotation = MKPointAnnotation()
+            print(CLLocationCoordinate2DMake(point.latitude, point.longitude))
             annotation.coordinate = CLLocationCoordinate2DMake(point.latitude, point.longitude)
             annotation.title = post["eventName"] as! String
             self.mapView.addAnnotation(annotation)
@@ -89,16 +88,4 @@ class PicMapViewController: UIViewController,MKMapViewDelegate {
      override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

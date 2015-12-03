@@ -8,6 +8,7 @@
  */
 
 import UIKit
+import CoreLocation
 import Parse
 
 class EventCreationController: UIViewController,CLLocationManagerDelegate {
@@ -19,10 +20,12 @@ class EventCreationController: UIViewController,CLLocationManagerDelegate {
     @IBOutlet weak var MapCheck: UISwitch!
     var Location = CLLocation()
     
+    var currentEvent : PFObject?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        getLocation()
     }
     
     
@@ -47,7 +50,8 @@ class EventCreationController: UIViewController,CLLocationManagerDelegate {
                 {
                     //Image Saved
                     print("Created event")
-                    self.performSegueWithIdentifier("CreateEventSeque", sender: event)
+                    self.currentEvent = event
+                    self.performSegueWithIdentifier("CreateEventSeque", sender: self)
                 }
                 else
                 {
@@ -55,6 +59,7 @@ class EventCreationController: UIViewController,CLLocationManagerDelegate {
                     print("Error")
                 }
         }
+            
             
         }
         else{
@@ -83,19 +88,34 @@ class EventCreationController: UIViewController,CLLocationManagerDelegate {
     
     
     func getLocation(){
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+//        if #available(iOS 8.0, *) {
+//            locationManager.requestAlwaysAuthorization()
+//        } else {
+//            // Fallback on earlier versions
+//        }
         if #available(iOS 8.0, *) {
-            locationManager.requestWhenInUseAuthorization()
-        } else {
+            locationManager.requestAlwaysAuthorization()        } else {
             // Fallback on earlier versions
         }
+        
+        if CLLocationManager.locationServicesEnabled() {
+            print("Starting location search")
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
             locationManager.startUpdatingLocation()
+        }
+        
+        
     }
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+//        Location = locationManager.location!
+//        locationManager.stopUpdatingLocation()
+        var locValue:CLLocationCoordinate2D = manager.location!.coordinate
         Location = locationManager.location!
+        print("locations = \(locValue.latitude) \(locValue.longitude)")
         locationManager.stopUpdatingLocation()
+        
     }
     
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
@@ -105,14 +125,10 @@ class EventCreationController: UIViewController,CLLocationManagerDelegate {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "CreateEventSeque"
         {
-            var currentObject : PFObject?
-            if let event = sender as? PFObject{
-                currentObject = sender as? PFObject
-            } else {
-                
-            }
+            
+            
             let singleScene = segue.destinationViewController as! SingleEventController
-            singleScene.currentEvent = (currentObject)
+            singleScene.currentEvent = currentEvent
             
         }
     }

@@ -43,6 +43,10 @@ class PictureAuthController: UIViewController,UIImagePickerControllerDelegate, U
     //Added manually may crash
     override func viewDidLoad() {
         super.viewDidLoad()
+        //Looks for single or multiple taps////////////////////////////////////////////////
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        view.addGestureRecognizer(tap)
+        ////////////////////////////////////////////////////////////////////////////
         print(mainImageReference)
         numTotalLabel.text = String(currentSignerNum) + " signed / " + String(imageCount) + " total"
     }
@@ -180,6 +184,11 @@ class PictureAuthController: UIViewController,UIImagePickerControllerDelegate, U
         UIGraphicsEndImageContext()
         
         tempImageView.image = nil
+    }
+    
+    func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
     }
     
     

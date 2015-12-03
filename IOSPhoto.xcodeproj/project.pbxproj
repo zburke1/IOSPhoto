@@ -61,7 +61,7 @@
 		912E2F271C0E316C00B7C5A4 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		912E2F291C0E3FBA00B7C5A4 /* SingleEventController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleEventController.swift; sourceTree = "<group>"; };
 		912E2F2B1C0E46A400B7C5A4 /* TakePictureController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TakePictureController.swift; sourceTree = "<group>"; };
-		912E2F2D1C0E5F2300B7C5A4 /* PicMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PicMapViewController.swift; path = ParseStarterProject/PicMapViewController.swift; sourceTree = "<group>"; };
+		912E2F2D1C0E5F2300B7C5A4 /* PicMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PicMapViewController.swift; sourceTree = "<group>"; };
 		912E2F2F1C0E624600B7C5A4 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		915490591C0DF92800098F4B /* HomePageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageController.swift; sourceTree = "<group>"; };
 		9154905B1C0DFAA700098F4B /* Footer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Footer.png; path = images/Footer.png; sourceTree = "<group>"; };
@@ -113,7 +113,6 @@
 			children = (
 				91F3BC3C1C0F6487006840C1 /* Legalese.png */,
 				91AECFC41C0EC8BA000DFDC4 /* test.m */,
-				912E2F2D1C0E5F2300B7C5A4 /* PicMapViewController.swift */,
 				912E2F231C0E2A6300B7C5A4 /* frame.jpg */,
 				912E2F211C0E294100B7C5A4 /* ufBars.jpg */,
 				912E2F1F1C0E234300B7C5A4 /* imgPlaceholder.jpg */,
@@ -140,6 +139,7 @@
 		81BA81471A49DA1800E65899 /* ParseStarterProject */ = {
 			isa = PBXGroup;
 			children = (
+				912E2F2D1C0E5F2300B7C5A4 /* PicMapViewController.swift */,
 				81BA814A1A49DA1800E65899 /* AppDelegate.swift */,
 				81BA814C1A49DA1800E65899 /* ViewController.swift */,
 				814C3AC61B69877600E307BB /* Main.storyboard */,
