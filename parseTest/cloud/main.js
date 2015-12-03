@@ -8,11 +8,37 @@ Parse.Cloud.define("MailGunSend",function(request,response){
 	var Mailgun = require('mailgun');
 	Mailgun.initialize('sandboxad669d823bcb44639dc2247e22b2827d.mailgun.org', 'key-f7da862b5bb12e1343e795bf6a1e6241');
 	
+	var toEmailString = "";
+	var a = new Parse.Query("Signatures");
+	a.equalTo("EventImageRef", request.params.imageId);
+	a.find({
+	    success: function(results)
+	    {
+			for (var i = 0; i < results.length; i++) {
+			      var object = results[i];
+				  if(i!=results.length - 1){
+				  toEmailString = toEmailString + String(object.get('signeeEmail')) + ",";
+				  }
+				  else{
+				  	toEmailString = toEmailString + String(object.get('signeeEmail'));
+				  }
+				  console.log(toEmailString)
+			    }
+		},
+	  error: function(error) {
+	    // The networking request failed.
+		  console.log("could not add");
+	  }
+		
+	});
+	
+	
 	Mailgun.sendEmail({
-	  to: "zburke1@ufl.edu",
-	  from: "Mailgun@CloudCode.com",
-	  subject: "Thanks for stopping by",
-	  text: "Attached is your image!"
+	  to: toEmailString,
+	  from: "zburke1@ufl.edu",
+	  subject: "Thanks for taking a picture",
+	  text: "We enjoyed seeing you at the event. Attached is your image!",
+	  html: '<html><body><img src="' + request.params.imageUrl + '"></body></html>'
 	}, {
 	  success: function(httpResponse) {
 	    console.log(httpResponse);

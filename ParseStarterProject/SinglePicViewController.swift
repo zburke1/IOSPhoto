@@ -65,8 +65,9 @@ class SinglePicViewController: UIViewController {
     
     @IBAction func emailPictureButton(sender: AnyObject) {
         //let parameters = ["eventImage": imageShown?.objectId]
-       
-        PFCloud.callFunctionInBackground("MailGunSend", withParameters: ["imageId": (imageShown?.objectId)!]) { results, error in
+        let parseImage = imageShown!["Image"] as! PFFile
+        print(String(parseImage.url))
+        PFCloud.callFunctionInBackground("MailGunSend", withParameters: ["imageId": (imageShown?.objectId)!,"imageUrl":parseImage.url!]) { results, error in
             if error == nil {
                 // Your error handling here
                 print("Success sending email function")
